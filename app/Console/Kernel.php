@@ -28,7 +28,6 @@ class Kernel extends ConsoleKernel
     {
          $schedule->command('command:importfile')
                   ->everyFiveMinutes();
-
     }
 
     /**

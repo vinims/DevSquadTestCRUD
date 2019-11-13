@@ -50,46 +50,46 @@ class ImportController extends Controller
             if($fileSize <= $maxFileSize){
     
                // File upload location
-               $location = 'uploads';
-    
+               $location = dirname(__DIR__,3).'\private';
+
                // Upload file
-//               $file->move($location,$filename);
+               $file->move($location,$filename);
     
               // Import CSV to Database
-              $filepath = public_path($location."/".$filename);
+              // $filepath = public_path($location."/".$filename);
     
               // Reading file
-              $file = fopen($filepath,"r");
+              // $file = fopen($filepath,"r");
     
-              $importData_arr = array();
-              $i = 0;
+              // $importData_arr = array();
+              // $i = 0;
     
-              while (($filedata = fgetcsv($file, 1000, ",")) !== FALSE) {
-                 $num = count($filedata );
+              // while (($filedata = fgetcsv($file, 1000, ",")) !== FALSE) {
+              //    $num = count($filedata );
                  
-                 // Skip first row (Remove below comment if you want to skip the first row)
-                 /*if($i == 0){
-                    $i++;
-                    continue; 
-                 }*/
-                 for ($c=0; $c < $num; $c++) {
-                    $importData_arr[$i][] = $filedata [$c];
-                 }
-                 $i++;
-              }
-             fclose($file);
+              //    // Skip first row (Remove below comment if you want to skip the first row)
+              //    /*if($i == 0){
+              //       $i++;
+              //       continue; 
+              //    }*/
+              //    for ($c=0; $c < $num; $c++) {
+              //       $importData_arr[$i][] = $filedata [$c];
+              //    }
+              //    $i++;
+              // }
+            //  fclose($file);
     
               // Insert to MySQL database
-              foreach($importData_arr as $importData){
+              // foreach($importData_arr as $importData){
 
-                $insertData = array(
-                   "name"=>$importData[0],
-                   "category"=>$importData[1],
-                   "price"=>$importData[2],
-                   "imageUrl"=>$importData[3],);
-                Product::insertData($insertData);
+              //   $insertData = array(
+              //      "name"=>$importData[0],
+              //      "category"=>$importData[1],
+              //      "price"=>$importData[2],
+              //      "imageUrl"=>$importData[3],);
+              //   Product::insertData($insertData);
     
-              }
+              // }
     
               Session::flash('message','Import Successful.');
             }else{
